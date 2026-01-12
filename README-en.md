@@ -52,119 +52,119 @@ uv run main.py
 
 ---
 
-## 附录：使用 Docker 部署
+## Deployment with Docker
 
-本项目支持通过 Docker 和 Docker Compose 快速部署。
+This project supports rapid deployment via Docker and Docker Compose.
 
-### 1. 使用 Docker Compose (推荐)
-这是最简单的方法，会自动启动 Redis 和 ProxyPool 容器：
+### 1. Using Docker Compose (Recommended)
+This is the easiest method, which automatically starts Redis and ProxyPool containers:
 
 ```bash
 docker-compose up -d
 ```
 
-### 2. 仅构建 ProxyPool 镜像
-如果你已有运行中的 Redis：
+### 2. Building ProxyPool Image Only
+If you already have a running Redis instance:
 
 ```bash
-# 构建镜像
+# Build the image
 docker build -t proxy-pool .
 
-# 运行容器 (需要指定 Redis 地址)
+# Run the container (specify Redis address)
 docker run -d -p 8000:8000 -e REDIS_HOST=host.docker.internal proxy-pool
 ```
 
 ---
 
-## 快速使用示例
+## Quick Usage Examples
 
-获取代理并使用 `curl` 访问百度：
+Get a proxy and access Google with `curl`:
 
 ```bash
-# 1. 获取一个代理 (纯文本格式)
+# 1. Get a proxy (plain text format)
 PROXY=$(curl -s http://localhost:8000/get?format=text)
 
-# 2. 使用该代理访问百度
-curl -x "http://$PROXY" https://www.baidu.com -I
+# 2. Use the proxy to access a website
+curl -x "http://$PROXY" https://www.google.com -I
 ```
 
-在 Python 脚本中使用：
+Using in a Python script:
 
 ```python
 import requests
 
-# 获取代理
+# Get proxy
 proxy = requests.get("http://localhost:8000/get?format=text").text
 
-# 使用代理
+# Use proxy
 proxies = {
     "http": f"http://{proxy}",
     "https": f"http://{proxy}",
 }
-response = requests.get("https://www.baidu.com", proxies=proxies)
+response = requests.get("https://www.google.com", proxies=proxies)
 print(response.status_code)
 ```
 
 
-## 主要功能
+## Main Functions
 
-- 自动抓取多来源的代理IP
-- 实时验证代理IP的可用性和速度
-- 支持批量运行和定时更新
-- 简洁易用，快速部署
+- Automatically crawl proxy IPs from multiple sources
+- Real-time validation of proxy IP availability and speed
+- Support for batch processing and scheduled updates
+- Simple to use and quick to deploy
 
-## 安装与运行
+## Installation and Execution
 
-1. 克隆本仓库：
+1. Clone this repository:
 
 ```
 git clone https://github.com/XiaomingX/proxypool.git
 cd proxypool
 ```
 
-2. 安装依赖（假设您使用 Python 环境，请根据实际需求调整）：
+2. Install dependencies (assuming a Python environment, adjust as needed):
 
 ```
 pip install -r requirements.txt
 ```
 
-3. 运行代理抓取脚本：
+3. Run the proxy crawling script:
 
 ```
 python main.py
 ```
 
-4. 运行代理验证脚本：
+4. Run the proxy validation script:
 
 ```
 python verify.py
 ```
 
-## 如果你对网络安全感兴趣，如下开源代码不容错过：
- - rust实现的端口扫描器：
+## Cybersecurity Projects You Might Like:
+ - Port Scanner implemented in Rust:
    - https://github.com/XiaomingX/RustProxyHunter
- - python实现的代理池检测：
+ - Proxy Pool detection implemented in Python:
    - https://github.com/XiaomingX/proxy-pool
- - golang实现的供应链安全，CVE-POC的全自动收集（注无人工审核，可能被投毒，仅限有基础的朋友）：
+ - Supply chain security & CVE-POC automated collection in Golang (Note: No manual review, use with caution):
    - https://github.com/XiaomingX/data-cve-poc
- - python实现的检查.git泄漏的工具
+ - .git leak detection tool implemented in Python:
    - https://github.com/XiaomingX/github-sensitive-hack
 
-## 参考与灵感来源
+## References and Inspiration
 
-本项目部分设计思路和实现参考了以下优秀开源项目：
+This project's design and implementation were inspired by the following excellent open-source projects:
 
-- [ProjectDiscovery Katana](https://github.com/projectdiscovery/katana) —— 一款现代化的爬虫和蜘蛛框架，提供强大的爬取与解析功能。
-- [Spider-rs Spider](https://github.com/spider-rs/spider) —— 一个高性能、可扩展的爬虫框架，适合大规模爬取任务。
+- [ProjectDiscovery Katana](https://github.com/projectdiscovery/katana) —— A modern crawler and spider framework.
+- [Spider-rs Spider](https://github.com/spider-rs/spider) —— A high-performance, scalable crawler framework.
 
-## 贡献指南
+## Contribution Guidelines
 
-欢迎提交 issues 和 pull requests，帮助我们不断改进。
+Feel free to submit issues and pull requests to help us improve.
 
-## 许可证
+## License
 
-该项目采用 MIT 许可证，详情请查看 LICENSE 文件。
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 
-*祝您使用愉快！如有任何问题，请联系作者。*
+*Enjoy using ProxyPool! If you have any questions, please contact the author.*

@@ -1,16 +1,16 @@
 # ProxyPool Architect
 
-A modern, fast, and reliable proxy pool built with Python 3.11+, FastAPI, and Redis.
+基于 Python 3.11+、FastAPI 和 Redis 构建的现代化、快速且可靠的代理池。
 
-## Features
-- **Modern Tech Stack**: FastAPI, aiohttp, Redis, APScheduler, Loguru.
-- **Asynchronous**: Fully async from crawling to validation.
-- **Weighted Scoring**: Dynamic score-based management (Success +10, Failure -20).
-- **Easy Deployment**: Managed by `uv`.
+## 特性
+- **现代化技术栈**: FastAPI, aiohttp, Redis, APScheduler, Loguru。
+- **异步**: 从抓取到验证完全异步。
+- **权重评分**: 动态基于评分的管理（成功 +10，失败 -20）。
+- **易于部署**: 使用 `uv` 管理。
 
-## Quick Start
+## 快速开始
 
-### 1. Install Redis (Prerequisite)
+### 1. 安装 Redis (前提条件)
 
 #### macOS
 ```bash
@@ -25,34 +25,34 @@ sudo apt install redis-server
 sudo systemctl start redis-server
 ```
 
-### 2. Configuration
+### 2. 配置
 
-Create a `.env` file in the root directory to override default settings if necessary:
+如果需要，在根目录创建 `.env` 文件以覆盖默认设置：
 ```env
 REDIS_HOST=localhost
 REDIS_PORT=6379
 # REDIS_PASSWORD=your_password
 ```
 
-### 3. Install & Run Project
-Ensure you have `uv` installed ([Install uv](https://docs.astral.sh/uv/getting-started/installation/)).
+### 3. 安装与运行项目
+确保已安装 `uv` ([安装 uv](https://docs.astral.sh/uv/getting-started/installation/))。
 
 ```bash
 uv sync
 uv run main.py
 ```
 
-## API Endpoints
-- `GET /get`: Get a random high-quality proxy. Supports `format=text`.
-- `GET /stats`: View pool health and statistics.
-- `GET /all`: List all proxies in the pool.
+## API 接口
+- `GET /get`: 获取一个高质量的随机代理。支持 `format=text`。
+- `GET /stats`: 查看代理池健康状况和统计数据。
+- `GET /all`: 列出代理池中的所有代理。
 
-## Built with
+## 构建自
 ![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)
 
 ---
 
-## 附录：使用 Docker 部署
+## 使用 Docker 部署
 
 本项目支持通过 Docker 和 Docker Compose 快速部署。
 
