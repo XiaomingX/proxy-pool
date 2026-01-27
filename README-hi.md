@@ -91,17 +91,17 @@ curl -x "http://$PROXY" https://www.google.com -I
 Python स्क्रिप्ट में उपयोग:
 
 ```python
-import requests
+import httpx
 
 # प्रॉक्सी प्राप्त करें
-proxy = requests.get("http://localhost:8000/get?format=text").text
+proxy = httpx.get("http://localhost:8000/get?format=text").text
 
 # प्रॉक्सी का उपयोग करें
 proxies = {
-    "http": f"http://{proxy}",
-    "https": f"http://{proxy}",
+    "http://": f"http://{proxy}",
+    "https://": f"http://{proxy}",
 }
-response = requests.get("https://www.google.com", proxies=proxies)
+response = httpx.get("https://www.google.com", proxies=proxies)
 print(response.status_code)
 ```
 

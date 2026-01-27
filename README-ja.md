@@ -91,17 +91,17 @@ curl -x "http://$PROXY" https://www.google.com -I
 Python スクリプトでの使用：
 
 ```python
-import requests
+import httpx
 
 # プロキシの取得
-proxy = requests.get("http://localhost:8000/get?format=text").text
+proxy = httpx.get("http://localhost:8000/get?format=text").text
 
 # プロキシの使用
 proxies = {
-    "http": f"http://{proxy}",
-    "https": f"http://{proxy}",
+    "http://": f"http://{proxy}",
+    "https://": f"http://{proxy}",
 }
-response = requests.get("https://www.google.com", proxies=proxies)
+response = httpx.get("https://www.google.com", proxies=proxies)
 print(response.status_code)
 ```
 

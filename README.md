@@ -7,6 +7,7 @@ A modern, fast, and reliable proxy pool built with Python 3.11+, FastAPI, and Re
 - **Asynchronous**: Fully async from crawling to validation.
 - **Weighted Scoring**: Dynamic score-based management (Success +10, Failure -20).
 - **Easy Deployment**: Managed by `uv`.
+- **Network Scanning**: Ability to scan network segments for proxies (see [fetch-proxy-by-scan](fetch-proxy-by-scan/README.md)).
 
 ## Quick Start
 
@@ -91,17 +92,17 @@ curl -x "http://$PROXY" https://www.baidu.com -I
 在 Python 脚本中使用：
 
 ```python
-import requests
+import httpx
 
 # 获取代理
-proxy = requests.get("http://localhost:8000/get?format=text").text
+proxy = httpx.get("http://localhost:8000/get?format=text").text
 
 # 使用代理
 proxies = {
-    "http": f"http://{proxy}",
-    "https": f"http://{proxy}",
+    "http://": f"http://{proxy}",
+    "https://": f"http://{proxy}",
 }
-response = requests.get("https://www.baidu.com", proxies=proxies)
+response = httpx.get("https://www.baidu.com", proxies=proxies)
 print(response.status_code)
 ```
 

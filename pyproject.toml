@@ -8,6 +8,7 @@ dependencies = [
     "aiohttp>=3.13.3",
     "apscheduler>=3.11.2",
     "fastapi>=0.128.0",
+    "httpx>=0.28.1",
     "loguru>=0.7.3",
     "pydantic-settings>=2.12.0",
     "redis>=7.1.0",

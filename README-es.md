@@ -91,17 +91,17 @@ curl -x "http://$PROXY" https://www.google.com -I
 Uso en un script de Python:
 
 ```python
-import requests
+import httpx
 
 # Obtener proxy
-proxy = requests.get("http://localhost:8000/get?format=text").text
+proxy = httpx.get("http://localhost:8000/get?format=text").text
 
 # Usar proxy
 proxies = {
-    "http": f"http://{proxy}",
-    "https": f"http://{proxy}",
+    "http://": f"http://{proxy}",
+    "https://": f"http://{proxy}",
 }
-response = requests.get("https://www.google.com", proxies=proxies)
+response = httpx.get("https://www.google.com", proxies=proxies)
 print(response.status_code)
 ```
 

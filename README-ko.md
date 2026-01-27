@@ -91,17 +91,17 @@ curl -x "http://$PROXY" https://www.google.com -I
 Python 스크립트에서 사용:
 
 ```python
-import requests
+import httpx
 
 # 프록시 가져오기
-proxy = requests.get("http://localhost:8000/get?format=text").text
+proxy = httpx.get("http://localhost:8000/get?format=text").text
 
 # 프록시 사용
 proxies = {
-    "http": f"http://{proxy}",
-    "https": f"http://{proxy}",
+    "http://": f"http://{proxy}",
+    "https://": f"http://{proxy}",
 }
-response = requests.get("https://www.google.com", proxies=proxies)
+response = httpx.get("https://www.google.com", proxies=proxies)
 print(response.status_code)
 ```
 
