@@ -148,8 +148,6 @@ python verify.py
    - https://github.com/XiaomingX/proxy-pool
  - golang实现的供应链安全，CVE-POC的全自动收集（注无人工审核，可能被投毒，仅限有基础的朋友）：
    - https://github.com/XiaomingX/data-cve-poc
- - python实现的检查.git泄漏的工具
-   - https://github.com/XiaomingX/github-sensitive-hack
 
 ## 参考与灵感来源
 
