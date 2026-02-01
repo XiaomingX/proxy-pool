@@ -1,17 +1,35 @@
 # ProxyPool Architect
 
-A modern, fast, and reliable proxy pool built with Python 3.11+, FastAPI, and Redis.
+基于 Python 3.11+、FastAPI 和 Redis 构建的现代化、快速且可靠的代理池。
 
-## Features
-- **Modern Tech Stack**: FastAPI, aiohttp, Redis, APScheduler, Loguru.
-- **Asynchronous**: Fully async from crawling to validation.
-- **Weighted Scoring**: Dynamic score-based management (Success +10, Failure -20).
-- **Easy Deployment**: Managed by `uv`.
-- **Network Scanning**: Ability to scan network segments for proxies (see [fetch-proxy-by-scan](fetch-proxy-by-scan/README.md)).
+## 特性
+- **现代化技术栈**: FastAPI, aiohttp, Redis, APScheduler, Loguru。
+- **异步**: 从抓取到验证完全异步。
+- **权重评分**: 动态基于评分的管理（成功 +10，失败 -20）。
+- **易于部署**: 使用 `uv` 管理。
 
-## Quick Start
+## 项目结构
 
-### 1. Install Redis (Prerequisite)
+```
+proxy-pool/
+├── src/                          # 源代码目录
+│   ├── main.py                   # 应用入口
+│   └── proxy_pool/               # 核心包
+│       ├── api/                  # API 路由
+│       ├── core/                 # 核心功能（调度器等）
+│       ├── fetchers/             # 代理抓取器
+│       ├── schemas/              # 数据模型
+│       └── utils/                # 工具函数
+├── fetch-proxy-by-deploy/        # 部署脚本
+├── fetch-proxy-by-scan/          # 扫描工具
+├── pyproject.toml                # 项目配置
+├── Dockerfile                    # Docker 镜像配置
+└── docker-compose.yml            # Docker Compose 配置
+```
+
+## 快速开始
+
+### 1. 安装 Redis (前提条件)
 
 #### macOS
 ```bash
@@ -26,34 +44,34 @@ sudo apt install redis-server
 sudo systemctl start redis-server
 ```
 
-### 2. Configuration
+### 2. 配置
 
-Create a `.env` file in the root directory to override default settings if necessary:
+如果需要，在根目录创建 `.env` 文件以覆盖默认设置：
 ```env
 REDIS_HOST=localhost
 REDIS_PORT=6379
 # REDIS_PASSWORD=your_password
 ```
 
-### 3. Install & Run Project
-Ensure you have `uv` installed ([Install uv](https://docs.astral.sh/uv/getting-started/installation/)).
+### 3. 安装与运行项目
+确保已安装 `uv` ([安装 uv](https://docs.astral.sh/uv/getting-started/installation/))。
 
 ```bash
 uv sync
-uv run main.py
+uv run src/main.py
 ```
 
-## API Endpoints
-- `GET /get`: Get a random high-quality proxy. Supports `format=text`.
-- `GET /stats`: View pool health and statistics.
-- `GET /all`: List all proxies in the pool.
+## API 接口
+- `GET /get`: 获取一个高质量的随机代理。支持 `format=text`。
+- `GET /stats`: 查看代理池健康状况和统计数据。
+- `GET /all`: 列出代理池中的所有代理。
 
-## Built with
+## 构建自
 ![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)
 
 ---
 
-## 附录：使用 Docker 部署
+## 使用 Docker 部署
 
 本项目支持通过 Docker 和 Docker Compose 快速部署。
 
@@ -132,13 +150,13 @@ pip install -r requirements.txt
 3. 运行代理抓取脚本：
 
 ```
-python main.py
+python src/main.py
 ```
 
 4. 运行代理验证脚本：
 
 ```
-python verify.py
+python src/verify.py
 ```
 
 ## 如果你对网络安全感兴趣，如下开源代码不容错过：
@@ -148,6 +166,8 @@ python verify.py
    - https://github.com/XiaomingX/proxy-pool
  - golang实现的供应链安全，CVE-POC的全自动收集（注无人工审核，可能被投毒，仅限有基础的朋友）：
    - https://github.com/XiaomingX/data-cve-poc
+ - python实现的检查.git泄漏的工具
+   - https://github.com/XiaomingX/github-sensitive-hack
 
 ## 参考与灵感来源
 
